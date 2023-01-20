@@ -1,55 +1,33 @@
-//написати рекурсивну функцію, яка приймає число і повертає рядок з вкладених пар круглих дужок.кількість пар дорівнює прийнятому аргументу.
-//якщо число(аргумет) менше 1 - повертаємо лише одну пару круглих дужок
-// pairBrickets(4) => '(((())))'
-// pairBrickets(-4) => '()'
-// pairBrickets('qwe') => error
+//написати фукцію стрілку, яка приймає джерельний масив
+//і повертає масив з двох значень,
+//які є мінімальним і максимальним значенням джерельного масиву
+//якщо джерельний масив порожній, то функція повертає порожній масив
 
-const pairBrickets = (count) => {
-  if (typeof count !== "number") {
-    throw new TypeError("type must be number");
-  }
-  if (count <= 1) {
-    return "()";
-  }
-  return `(${pairBrickets(count - 1)})`;
+const arr = [1, 2, 3, 4];
+
+const getNewArray = (arr) => {
+  const newArray = [];
+  newArray.push(Math.min(...arr), Math.max(...arr));
+  return newArray;
 };
 
-try {
-  console.log(pairBrickets(-2));
-} catch (error) {
-  console.log(error);
-}
+console.log(getNewArray(arr));
 
-//написати рекурсивну функцію, яка приймає два числа і повертає найбільший спільний дільник цих двох чисел
-// getDivider(12,15) => 3
-// Ошибки: не 0 , число < 0
+//написати функцію стрілку, яка приймає безліч аргументів
+//і повертає результат їх множення, якщо аргументів не має - повертає null
 
-//два числа порівнюють і
-//від більшого віднімають менше до тих пір,
-//поки числа не стануть рівними.
-//Число, якому вони стануть рівними,
-//і є їх найбільший спільний дільник.
+const getMultipleArgs = (...args) =>
+  args.length === 0 ? null : args.reduce((acc, num) => acc * num);
 
-const getDivider = (num1, num2) => {
-  if (typeof num1 !== "number" || typeof num2 !== "number") {
-    throw new TypeError("type must be number");
-  }
-  if( num1 <= 0 || num2 <= 0){
-    throw new RangeError("Numbers cant be 0 or negative");
-  }
-  if (num1 === num2){
-    return num1;
-  }
-  if(num1>num2){
-    return getDivider(num1-num2,num2);
-  }
-  if(num1<num2){
-    return getDivider(num1,num2-num1);
-  }
-};
+console.log(getMultipleArgs());
 
-try {
-  console.log(getDivider(12,15));
-} catch (error) {
-  console.log(error);
-}
+//переписати функцію, що нижче на функцію стрілку
+// function askUser(question) {
+//   if (userInput === confirm(question)) {
+//     return "OK";
+//   }
+//   return "error";
+// }
+
+const askUserArrow = (question) => confirm(question)? console.log('OK'):console.log('error');
+askUserArrow('hi');
